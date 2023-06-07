@@ -1,7 +1,12 @@
 import test from 'ava'
-import echarts from './index'
-import option from './demo/area'
+import echarts from './index.js'
+import {option} from './demo/area.js'
 import { readFileSync, unlinkSync } from 'fs'
+
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const testImage = readFileSync('./demo/area.png')
 

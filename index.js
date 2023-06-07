@@ -1,8 +1,6 @@
-var echarts = require("echarts");
-var Canvas = require("canvas-prebuilt");
-var fs = require('fs');
-var path = require('path');
-
+import * as echarts from 'echarts';
+import { createCanvas } from 'canvas';
+import * as fs from 'fs';
 
 /**
  * @param config = {
@@ -15,19 +13,13 @@ var path = require('path');
 
  *
  */
-module.exports = function (config) {
-    if (config.canvas) {
-        Canvas = config.canvas;
-    }
-
-    var ctx = new Canvas(128, 128);
+export default function(config) {
+    var ctx = createCanvas(128, 128);
     if (config.font) {
         ctx.font = config.font;
     }
 
-    echarts.setCanvasCreator(function () {
-        return ctx;
-    });
+    echarts.setPlatformAPI({ createCanvas });
 
     var chart, option = {
         title: {
@@ -58,7 +50,7 @@ module.exports = function (config) {
     config = Object.assign({}, defaultConfig, config)
 
     config.option.animation = false;
-    chart = echarts.init(new Canvas(parseInt(config.width, 10), parseInt(config.height, 10)));
+    chart = echarts.init(createCanvas(parseInt(config.width, 10), parseInt(config.height, 10)));
     chart.setOption(config.option);
     if (config.path) {
         try {

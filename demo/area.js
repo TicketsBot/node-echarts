@@ -1,7 +1,11 @@
-var node_echarts = require('../index.js');
-var path = require('path');
+import echarts from '../index.js';
 
-var option = {
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+export var option = {
     title: {
         text: '堆叠区域图'
     },
@@ -12,9 +16,7 @@ var option = {
         data:['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']
     },
     toolbox: {
-        feature: {
-            saveAsImage: {}
-        }
+        show: false
     },
     grid: {
         left: '3%',
@@ -79,9 +81,7 @@ var option = {
     ]
 };
 
-module.exports = option
-
-node_echarts({
+echarts({
     path: __dirname + '/area.png',
     option: option,
     width:  1000,
